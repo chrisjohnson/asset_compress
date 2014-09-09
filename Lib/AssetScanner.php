@@ -131,7 +131,7 @@ class AssetScanner {
 				$exists = file_exists($fullPath);
 
 				if ($absolute === false && $exists) {
-					$expanded['relative'] = str_replace(WWW_ROOT, '/', $expanded['relative']);
+					$expanded['relative'] = preg_replace('/.*?' . preg_quote(WWW_ROOT, '/') . '/i', '/', $fullPath);
 				}
 				if ($exists) {
 					$expanded['absolute'] = $fullPath;
