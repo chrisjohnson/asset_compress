@@ -12,8 +12,11 @@ class ScssFilter extends AssetFilter {
 
 	protected $_settings = array(
 		'ext' => '.scss',
+		'extOnly' => true,
 		'sass' => '/usr/bin/sass',
 		'path' => '/usr/bin',
+		'lang' => 'sass',
+		'compressed' => false,
 	);
 
 /**
@@ -24,11 +27,17 @@ class ScssFilter extends AssetFilter {
  * @return string
  */
 	public function input($filename, $input) {
-		if (substr($filename, strlen($this->_settings['ext']) * -1) !== $this->_settings['ext']) {
+		if (!empty($this->_settings['extOnly']) && substr($filename, strlen($this->_settings['ext']) * -1) !== $this->_settings['ext']) {
 			return $input;
 		}
 		$filename = preg_replace('/ /', '\\ ', $filename);
 		$bin = $this->_settings['sass'] . ' ' . $filename;
+		if ($this->_settings['lang'] == 'scss') {
+			$bin .= ' --scss';
+		}
+		if (!empty($this->_settings['compressed'])) {
+			$bin .= ' --style compressed';
+		}
 		$return = $this->_runCmd($bin, '', array('PATH' => $this->_settings['path']));
 		return $return;
 	}
