@@ -18,7 +18,8 @@ class ClosureJs extends AssetFilter {
  */
 	protected $_settings = array(
 		'path' => 'closure/compiler.jar',
-		'warning_level' => 'QUIET' //Supress warnings by default
+		'warning_level' => 'QUIET', //Supress warnings by default
+		'jscomp_warning' => 'checkTypes',
 	);
 
 /**
