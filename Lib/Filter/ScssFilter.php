@@ -36,7 +36,7 @@ class ScssFilter extends AssetFilter {
 			$bin .= ' --scss';
 		}
 		if (!empty($this->_settings['compressed'])) {
-			$bin .= ' --style compressed';
+			$bin .= ' --style compressed --output-style compressed';
 		}
 		$return = $this->_runCmd($bin, '', array('PATH' => $this->_settings['path']));
 		return $return;
