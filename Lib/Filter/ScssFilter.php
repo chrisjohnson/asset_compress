@@ -16,7 +16,7 @@ class ScssFilter extends AssetFilter {
 		'sass' => '/usr/bin/sass',
 		'path' => '/usr/bin',
 		'lang' => 'sass',
-		'compressed' => false,
+		'args' => '',
 	);
 
 /**
@@ -35,8 +35,8 @@ class ScssFilter extends AssetFilter {
 		if ($this->_settings['lang'] == 'scss') {
 			$bin .= ' --scss';
 		}
-		if (!empty($this->_settings['compressed'])) {
-			$bin .= ' --style compressed';
+		if (!empty($this->_settings['args'])) {
+			$bin .= ' ' . $this->_settings['args'];
 		}
 		$return = $this->_runCmd($bin, '', array('PATH' => $this->_settings['path']));
 		return $return;
